@@ -22,8 +22,16 @@ const initServer = async () => {
     },
   });
   const serialPort = new SerialPort({
-    path: "/dev/tty.usbserial-10",
+    path: "COM5",
     baudRate: 115200,
+  });
+
+  serialPort.on("open", () => {
+    console.log("Serial port opened at 115200 baud.");
+  });
+
+  serialPort.on("error", (err) => {
+    console.error("Serial Port Error:", err);
   });
 
   SerialPort.list().then(
